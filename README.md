@@ -54,7 +54,7 @@ A **Streamlit** web application is developed for real-time image classification.
 
 Ensure you have **Python 3.12** installed. Then, install the required packages:
 ``` bash
-pip install streamlit torch torchvision pillow matplotlib
+pip install -r requirements.txt
 ```
 ## Running the Application
 
