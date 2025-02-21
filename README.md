@@ -1,68 +1,126 @@
-Fruit Classifier 🍎🍌🍇🥭🍓
-This is a fruit classification web app built using Streamlit and PyTorch. The app allows users to upload an image of a fruit and classifies it into one of the predefined categories such as Apple, Banana, Grape, Mango, or Strawberry. The model is based on ResNet-50 and utilizes transfer learning to achieve high accuracy.
+# Fruit Image Classification using ResNet50
 
-Features
-Image Upload: Users can upload an image of a fruit (JPG, PNG, JPEG).
-Real-time Classification: The app classifies the uploaded image and displays the predicted fruit class.
-Confidence Score: Shows the confidence level of the classification.
-Prediction Probabilities: Visualizes the probabilities of each class through a bar chart.
-Custom Animations: The app has a sleek interface with animated transitions for the title, subtitle, and prediction results.
-Technologies Used
-Python: Main programming language.
-Streamlit: Used for building the web interface.
-PyTorch: Deep learning library used to load and predict using the pre-trained model.
-ResNet-50: Convolutional Neural Network used for fruit image classification.
-Matplotlib: Used to plot prediction probabilities.
-Installation
-To run the app locally, follow these steps:
+## Project Overview
 
-Clone the repository:
+This project is a **fruit image classifier** built using **PyTorch** and deployed as a Streamlit web application. It utilizes a **ResNet50** model trained on a dataset of fruit images to classify uploaded images into predefined categories.
 
-git clone https://github.com/yourusername/fruit-classifier.git
-cd fruit-classifier
+## Dataset
 
-Install the required dependencies:
+The dataset contains images of different fruit categories:
 
-pip install -r requirements.txt
-Download the model:
+- 🍏 **Apple**
 
-Ensure you have the model file fruit_classifier.pth saved in the correct directory (as specified in the code).
-Run the Streamlit app:
+- 🍌 **Banana**
 
+- 🍇 **Grape**
 
+- 🥭 **Mango**
+
+- 🍓 **Strawberry**
+
+Each image is processed and classified using a deep learning model.
+
+## Model Details
+
+- **Base Model**: ResNet50 (Pretrained on ImageNet)
+
+- **Custom Layers**:
+
+   - Fully connected (Linear) layer with 512 neurons and ReLU activation
+
+   - Dropout (0.5) for regularization
+
+   - Final classification layer with softmax activation
+
+- **Training**: Model fine-tuned on fruit images
+
+- **Inference**: Uses Softmax probabilities to determine class
+
+## Web Application
+
+A **Streamlit** web application is developed for real-time image classification.
+
+### Features:
+
+- ✅ Upload an image for classification
+- ✅ Display the uploaded image
+- ✅ Show predicted class and confidence score
+- ✅ Visualize class probabilities using a bar chart
+- ✅ Custom animations and styling for better user experience
+
+## Installation
+
+### Dependencies
+
+Ensure you have **Python 3.12** installed. Then, install the required packages:
+``` bash
+pip install streamlit torch torchvision pillow matplotlib
+```
+## Running the Application
+
+To run the Streamlit web app, execute:
+``` bash
 streamlit run app.py
-Open the URL provided by Streamlit in your browser to use the app.
+```
+## File Structure
+``` bash
+📂 Fruit-Classification
+├── 📜 fruit_classifier.pth  # Trained model weights
+├── 📜 app.py                # Streamlit web application
+├── 📜 requirements.txt      # Dependencies
+└── 📜 README.md             # Project documentation
+```
+## How the Application Works
 
-Model
-The app uses a ResNet-50 model, fine-tuned on a dataset of fruit images to classify them into the following categories:
+1) The **ResNet50 model** is loaded from ``` bashfruit_classifier.pth.```
 
-Apple
-Banana
-Grape
-Mango
-Strawberry
-The model is saved as fruit_classifier.pth and is loaded into the app to make predictions on uploaded images.
+2) Uploaded images are **preprocessed**:
 
-File Structure
+    - Converted to **RGB** (if grayscale)
 
-fruit-classifier/
-│
-├── app.py                  # Streamlit application script
-├── fruit_classifier.pth    # Pre-trained model (download and place it in the directory)
-├── requirements.txt        # Python dependencies
-├── README.md               # Project overview and instructions
-└── assets/
-    └── logo.png            # Logo for the app (optional)
-Usage
-Upload an image of a fruit by clicking the "Choose an image..." button.
-The app will process the image, classify it, and display:
-The predicted fruit class.
-The confidence level of the classification.
-A bar chart of prediction probabilities for each fruit class.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+    - Resized to **224x224** pixels
 
-Acknowledgments
-Streamlit for providing an easy-to-use web framework.
-PyTorch for the deep learning framework.
-ResNet-50 for pre-trained models used in image classification.
+    - Normalized using ImageNet mean and standard deviation
+
+    - Converted to tensor
+
+3) The **model predicts** the fruit class and returns confidence scores.
+
+4) The results are **displayed** in the Streamlit UI, including:
+
+- 🎯 **Predicted class**
+
+- 📊 **Confidence score**
+
+- 📈 **Probability distribution (bar chart)**
+
+## Example Output
+
+When an image is uploaded, the app displays:
+
+- **Predicted Class**: 🍎 Apple
+
+- **Confidence**: 97.2%
+
+- **Probability Chart**:
+
+   - 🍏 Apple: 97.2%
+
+   - 🍌 Banana: 1.5%
+
+   - 🥭 Mango: 0.8%
+
+   - 🍇 Grape: 0.3%
+
+   - 🍓 Strawberry: 0.2%
+
+## Future Improvements
+
+- 🔹 Expand dataset with more fruit categories
+- 🔹 Train a deeper model like EfficientNet
+- 🔹 Implement real-time webcam classification
+- 🔹 Deploy as a cloud-based API
+
+## Contributing
+
+Feel free to fork this repository and submit pull requests. Any contributions to improve the model or application are welcome!
